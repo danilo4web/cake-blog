@@ -3,6 +3,7 @@ setup:
 	@make build
 	@make up
 	@make composer-update
+	@make migrate
 	@make temp-write-permission
 	@make logs
 prepare:
@@ -14,11 +15,13 @@ up:
 down:
 	docker-compose down
 temp-write-permission:
-	docker exec blog-php bash -c "chmod 777 tmp/ -Rfv"
+	docker exec blog-php bash -c "mkdir tmp && chmod 777 tmp/ -Rfv"
 logs:
-	docker exec blog-php bash -c "mkdir logs && chmod 777 logs"
+	docker exec blog-php bash -c "mkdir logs && chmod 777 logs/ -Rfv"
 composer-update:
 	docker exec blog-php bash -c "composer update"
+migrate:
+	docker exec blog-php bash -c "bin/cake migrations migrate"
 test:
 	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/TagsControllerTest.php"
 	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/CategoriesControllerTest.php"
