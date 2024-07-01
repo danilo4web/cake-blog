@@ -1,53 +1,86 @@
-# CakePHP Application Skeleton
+## MVP Blog API using CakePHP 4
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+### Setup:
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+##### 1. Copy the .env.example file to .env:
+```
+cp .env.example .env
+```
+##### 2. Install dependencies and set up the project:
+```
+make setup
+```
+![Alt text](docs/docker-containers.png)
 
-## Installation
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+### Running Tests:
 
-If Composer is installed globally, run
+##### To run all tests:
+```
+make test
+```
+![Alt text](docs/phpunit-tests.png)
 
-```bash
-composer create-project --prefer-dist cakephp/app
+
+### API Routes:
+
+
+##### Add new TAG
+```
+curl --location 'http://0.0.0.0:8180/api/tags' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "New Tag",
+    "status": 1
+}'
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+##### Add new Category
+```
+curl --location 'http://0.0.0.0:8180/api/categories' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "New Category",
+    "status": 1
+}'
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
-```bash
-bin/cake server -p 8765
+##### Add new User
+```
+curl --location 'http://0.0.0.0:8180/api/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Danilo Pereira",
+    "email": "danilo@email.com",
+    "password": "password123"
+}'
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
 
-## Update
+##### Add new Post
+```
+curl --location 'http://0.0.0.0:8180/api/posts' \
+--header 'Content-Type: application/json' \
+--data '{
+"title": "New Post",
+"body": "This is the content of the post.",
+"slug": "new-post-title",
+"user_id": 1,
+"category_id": 1,
+"published": 0
+}'
+```
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+##### List Posts (with category filter)
+```
+curl --location 'http://0.0.0.0:8180/api/posts?category_id=1' \
+--data ''
+```
 
-## Configuration
 
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+### Entity-Relationship Diagram:
+![Alt text](docs/eer-diagram.png)
 
-## Layout
-
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+### Postman collection (with the endpoints):
+[download it here!](docs/postman.collection.json)
