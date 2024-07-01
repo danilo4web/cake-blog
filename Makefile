@@ -16,3 +16,12 @@ logs:
 	docker exec blog-php bash -c "mkdir logs && chmod 777 logs"
 composer-update:
 	docker exec blog-php bash -c "composer update"
+test:
+	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/TagsControllerTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/CategoriesControllerTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/UsersControllerTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Controller/Api/PostsControllerTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Model/Table/TagsTableTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Model/Table/CategoriesTableTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Model/Table/UsersTableTest.php"
+	docker exec blog-php bash -c "composer test tests/TestCase/Model/Table/PostsTableTest.php"
