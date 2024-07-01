@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use Cake\Http\Response;
 use PHPUnit\Exception;
 
 class PostsController extends ApiController
@@ -41,5 +42,18 @@ class PostsController extends ApiController
                 $e->getMessage()
             )->withStatus(500);;
         }
+    }
+
+    public function list(): Response
+    {
+        $categoryId = $this->request->getQuery('category_id');
+
+        $query = $this->{$this->model}->find('all');
+
+        if ($categoryId !== null) {
+            $query->where(['category_id' => $categoryId]);
+        }
+
+        return $this->renderJSON($query->toArray());
     }
 }

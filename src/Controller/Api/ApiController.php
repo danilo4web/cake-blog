@@ -8,26 +8,35 @@ use Cake\Http\Response;
 
 class ApiController extends AppController
 {
-    protected function returnError(string $message, array $errors = []): Response
+    protected function renderJSON(array $data): Response
     {
         $this->autoRender = false;
 
         return $this->response->withType('application/json')
             ->withStringBody(json_encode([
-                'success' => false,
-                'message' => $message,
-                'errors' => $errors,
+                'data' => $data
             ]));
     }
 
-    protected function returnSuccess(string $message): Response
+    protected function returnError(string $msg, array $errors): Response
+    {
+        $this->autoRender = false;
+
+        return $this->response->withType('application/json')
+            ->withStringBody(json_encode([
+                'error' => $msg,
+                'message' => $errors,
+            ]));
+    }
+
+    protected function returnSuccess($msg): Response
     {
         $this->autoRender = false;
 
         return $this->response->withType('application/json')
             ->withStringBody(json_encode([
                 'success' => true,
-                'message' => $message,
+                'message' => $msg,
             ]));
     }
 }

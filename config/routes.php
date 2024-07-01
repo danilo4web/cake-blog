@@ -60,5 +60,7 @@ return function (RouteBuilder $routes): void {
         $routes->post('/categories', ['prefix' => 'Api', 'controller' => 'Categories', 'action' => 'add', '_method' => 'POST']);
         $routes->post('/users', ['prefix' => 'Api', 'controller' => 'Users', 'action' => 'add', '_method' => 'POST']);
         $routes->post('/posts', ['prefix' => 'Api', 'controller' => 'Posts', 'action' => 'add', '_method' => 'POST']);
+
+        $routes->get('/posts', ['prefix' => 'Api', 'controller' => 'Posts', 'action' => 'list', '_method' => 'GET']);
     });
 };
