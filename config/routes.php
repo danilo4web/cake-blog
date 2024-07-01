@@ -59,5 +59,6 @@ return function (RouteBuilder $routes): void {
         $routes->post('/tags', ['prefix' => 'Api', 'controller' => 'Tags', 'action' => 'add', '_method' => 'POST']);
         $routes->post('/categories', ['prefix' => 'Api', 'controller' => 'Categories', 'action' => 'add', '_method' => 'POST']);
         $routes->post('/users', ['prefix' => 'Api', 'controller' => 'Users', 'action' => 'add', '_method' => 'POST']);
+        $routes->post('/posts', ['prefix' => 'Api', 'controller' => 'Posts', 'action' => 'add', '_method' => 'POST']);
     });
 };
