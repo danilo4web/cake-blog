@@ -57,5 +57,6 @@ return function (RouteBuilder $routes): void {
         $routes->setExtensions(['json']);
 
         $routes->post('/tags', ['prefix' => 'Api', 'controller' => 'Tags', 'action' => 'add', '_method' => 'POST']);
+        $routes->post('/categories', ['prefix' => 'Api', 'controller' => 'Categories', 'action' => 'add', '_method' => 'POST']);
     });
 };
