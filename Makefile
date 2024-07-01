@@ -1,9 +1,12 @@
 setup:
+	@make prepare
 	@make build
 	@make up
 	@make composer-update
 	@make temp-write-permission
 	@make logs
+prepare:
+	cp .env.example .env
 build:
 	docker-compose build --no-cache --force-rm
 up:
