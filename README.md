@@ -11,6 +11,7 @@ cp .env.example .env
 ```
 make setup
 ```
+![Alt text](docs/docker-containers.png)
 
 
 ### Running Tests:
@@ -19,6 +20,7 @@ make setup
 ```
 make test
 ```
+![Alt text](docs/phpunit-tests.png)
 
 
 ### API Routes:
